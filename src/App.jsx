@@ -7,8 +7,7 @@ import Bulb from "./component/bulb/Bulb";
 import Battery from "./component/battery/Battery";
 
 function App() {
-  const [numberOfBulb, setNumberOfBulb] = useState(0);
-  const [numberOfBattery, setNumberOfBattery] = useState(0);
+  
   const [totalPower, setTotalPower] = useState(numberOfBattery * 1000);
   const [powerNeeded, setPowerNeeded] = useState(numberOfBulb * 10);
   useEffect(() => {
