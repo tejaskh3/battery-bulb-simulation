@@ -1,9 +1,49 @@
-.container {
-  background-color: white;
-  height: 100px;
-  width: 100px;
-  border-radius: 50%;
+.batteryContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.glow {
-  background-color: yellow;
+
+.headingContainer {
+  width: 100%;
+  text-align: center; /* Center the heading text */
+}
+
+.batteriesContainerMain {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.buttonContainer {
+  padding: 10px;
+}
+.buttonContainer button {
+  color: black;
+  background-color: #f8bdeb;
+  padding: 10px;
+  border-radius: 20%;
+  margin-left: 10px;
+  transition: all ease-in-out;
+}
+.buttonContainer button:hover {
+  transform: scale(1.1);
+}
+.batteryItem {
+  border: 1px solid;
+  width: 20px;
+  height: 50px;
+  transform: rotate(180deg);
+}
+
+.batteriesContainerMain {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 10px auto;
+}
+.batteryContainerShadow {
+  box-shadow: 0 4px 8px #072541;
+  padding: 20px;
+  border-radius: 5px;
 }
