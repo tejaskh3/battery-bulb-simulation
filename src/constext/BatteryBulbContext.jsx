@@ -1,6 +1,6 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useState } from "react";
 
-export const BatteryBulbContext = useContext({});
+export const BatteryBulbContext = createContext({});
 
 export const BatterBulbProvider = ({ children }) => {
   const [numberOfBulb, setNumberOfBulb] = useState(0);
