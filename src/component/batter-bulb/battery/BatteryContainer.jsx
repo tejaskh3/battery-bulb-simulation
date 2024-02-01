@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { BatteryBulbContext } from "../../../context/BatteryBulbContext";
 const BatteryContainer = () => {
-  const { numberOfBatteries } = useContext(BatteryBulbContext);
-  console.log(numberOfBatteries);
+  const { numberOfBattery } = useContext(BatteryBulbContext);
+  console.log(numberOfBattery);
   return <div>BatteryContainer</div>;
 };
 
