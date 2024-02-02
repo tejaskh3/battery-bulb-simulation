@@ -5,9 +5,10 @@ import Battery from "./Battery";
 const BatteryContainer = () => {
   const { addBattery, removeBattery, numberOfBattery } =
     useContext(BatteryBulbContext);
-  const Batteries = Array.from({ length: numberOfBattery }, (_, index) => (
-    <Battery key={index} />
-  ));
+  const Batteries = numberOfBattery?.map((battery) => {
+    const percentage = (battery.unitsLeft / 1000) * 100;
+    return <Battery percentLeft={percentage} />;
+  });
 
   return (
     <div className={styles.batteryContainer}>

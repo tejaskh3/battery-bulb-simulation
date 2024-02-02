@@ -4,9 +4,16 @@ import styles from "./bulb.module.css";
 import Bulb from "./Bulb";
 
 const BulbContainer = () => {
-  const { numberOfBulb, addBulb, removeBulb } = useContext(BatteryBulbContext);
-  const Bulbs = Array.from({ length: numberOfBulb }).map((_, id) => {
-    return <Bulb></Bulb>;
+  const { numberOfBulb, addBulb, removeBulb, isBatteryLeft, drainBattery } =
+    useContext(BatteryBulbContext);
+  const Bulbs = Array.from({ length: numberOfBulb }).map((_, index) => {
+    return (
+      <Bulb
+        key={index}
+        isBatteryLeft={isBatteryLeft}
+        drainBattery={drainBattery}
+      />
+    );
   });
   return (
     <div className={styles.batteryContainer}>
