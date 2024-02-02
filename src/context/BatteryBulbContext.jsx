@@ -4,11 +4,10 @@ export const BatteryBulbContext = createContext({});
 
 export const BatterBulbProvider = ({ children }) => {
   const [numberOfBulb, setNumberOfBulb] = useState(0);
-  const [numberOfBattery, setNumberOfBattery] = useState(0);
-  const powerPerBattery = 1000;
-  const totalPower = numberOfBattery * powerPerBattery;
-  const powerConsumptionPerBulb = 10;
-  const powerNeeded = numberOfBulb * powerConsumptionPerBulb;
+  const [numberOfBattery, setNumberOfBattery] = useState([]);
+  const isBatteryLeft = numberOfBattery?.some(
+    (battery) => battery.unitsLeft > 0
+  );
 
   // bulb controllers
   const addBulb = () => {
@@ -26,15 +25,58 @@ export const BatterBulbProvider = ({ children }) => {
 
   // batteryControllers
   const addBattery = () => {
-    setNumberOfBattery((prev) => prev + 1);
+    setNumberOfBattery((prev) => {
+      const isOtherBatteryDraining = prev.find(
+        (item) => item.isDraining === true
+      );
+      return [
+        ...prev,
+        { unitsLeft: 1000, isDraining: !isOtherBatteryDraining },
+      ];
+    });
   };
   const removeBattery = () => {
-    if (numberOfBattery <= 0) {
+    if (numberOfBattery.length <= 0) {
       alert("please add at least one battery to remove.");
       return;
     }
-    setNumberOfBattery((prev) => prev - 1);
+    setNumberOfBattery((prev) => {
+      const newBatteries = prev.slice(0, -1);
+      return newBatteries;
+    });
   };
+
+  // controller for draining battery
+  function drainBattery() {
+    // isDraining can be added here.
+    // use context for data;
+    setNumberOfBattery((prev) => {
+      // name change
+      const newValue = [...prev];
+      const drainingBattery = newValue.find(
+        (battery) => battery.isDraining === true
+      );
+      if (
+        drainingBattery &&
+        drainingBattery?.unitsLeft <= 0 &&
+        newValue?.length > 1
+      ) {
+        // isDraining can be moved to a function
+        const indexofDrainedBattery = newValue.findIndex(
+          (battery) => battery.isDraining === true
+        );
+        // this logic can be separated into another function.
+        const nextBattery = newValue[indexofDrainedBattery + 1];
+        if (!nextBattery) return newValue;
+        nextBattery.isDraining = true;
+        drainingBattery.isDraining = false;
+        console.log(newValue, "new value");
+        return newValue;
+      }
+      drainingBattery.unitsLeft -= 10;
+      return newValue;
+    });
+  }
 
   const value = {
     numberOfBattery,
@@ -43,6 +85,8 @@ export const BatterBulbProvider = ({ children }) => {
     numberOfBulb,
     addBulb,
     removeBulb,
+    isBatteryLeft,
+    drainBattery,
   };
 
   return (
