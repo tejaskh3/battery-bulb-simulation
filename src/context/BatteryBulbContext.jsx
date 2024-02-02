@@ -8,7 +8,6 @@ export const BatterBulbProvider = ({ children }) => {
   const isBatteryLeft = numberOfBattery?.some(
     (battery) => battery.unitsLeft > 0
   );
-  console.log(numberOfBulb);
   // bulb controllers
   const addBulb = () => {
     setNumberOfBulb((prev) => prev + 1);
