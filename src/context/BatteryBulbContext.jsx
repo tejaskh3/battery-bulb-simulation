@@ -8,7 +8,7 @@ export const BatterBulbProvider = ({ children }) => {
   const isBatteryLeft = numberOfBattery?.some(
     (battery) => battery.unitsLeft > 0
   );
-
+  console.log(numberOfBulb);
   // bulb controllers
   const addBulb = () => {
     setNumberOfBulb((prev) => prev + 1);
@@ -18,9 +18,7 @@ export const BatterBulbProvider = ({ children }) => {
       alert("Please provider at least one bulb to remove.");
       return;
     }
-    setNumberOfBulb((prev) => {
-      prev - 1;
-    });
+    setNumberOfBulb((prev) => prev -  1);
   };
 
   // batteryControllers
